@@ -31,7 +31,7 @@ def train_and_predict():
 
 print('start')
 count = 0
-while(count < 100):
+while(count < 10000):
     train_and_predict()
     predict_total(read_predict_data())
     count += 1
