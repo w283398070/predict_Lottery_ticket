@@ -25,13 +25,13 @@ def predict_total(predict_list):
 
 def train_and_predict():
     print('train_and_predict start')
-    os.system('python run_train_model.py --name dlt  --windows_size 3,5,7 --red_epochs 1 --blue_epochs 1 --batch_size 1')
+    os.system('python run_train_model.py --name dlt  --windows_size 3,5,7 --red_epochs 100 --blue_epochs 100 --batch_size 1')
     os.system('python run_predict.py  --name dlt --windows_size 3,5,7')
     print('train_and_predict end')
 
 print('start')
 count = 0
-while(count < 10000):
+while(count < 1000):
     train_and_predict()
     predict_total(read_predict_data())
     count += 1
