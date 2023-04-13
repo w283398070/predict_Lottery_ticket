@@ -42,6 +42,10 @@ print('start')
 count = 0
 train_count = 1
 while(count < 1000):
+    print('###########################')
+    print('cur count:' + str(count))
+    print('cur train:' + str(train_count))
+    clean_modeling_data()
     train_and_predict(train_count)
     predict_data_list = read_predict_data()
     predict_total([predict_data_list[0]], 3)
@@ -49,5 +53,6 @@ while(count < 1000):
     predict_total([predict_data_list[2]], 7)
     count += 1
     train_count += 1
+    print('###########################')
 
 print('end')
