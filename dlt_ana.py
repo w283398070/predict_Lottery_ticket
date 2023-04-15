@@ -3,15 +3,16 @@ import os
 import datetime
 import pandas as pd
 from config import *
+from common import get_current_number
 
-def read_predict_data():
+def read_predict_data(win):
     filename = datetime.datetime.now().strftime('%Y%m%d')
     filepath = "{}{}/".format(predict_path, "dlt")
-    fileadd = "{}{}_{}{}".format(filepath, 'predict', filename, ".csv")
+    fileadd = "{}{}_{}_{}{}".format(filepath, 'predict', get_current_number("dlt"), win, ".csv")
     if not os.path.exists(fileadd):
         return [],[]
     data = pd.read_csv(fileadd)
-    print(data)
+    #print(data)
     return data.iloc[:, :5].values.tolist(), data.iloc[:, -2:].values.tolist()
 
 def cacl_probability(data_list):
@@ -44,12 +45,17 @@ def count_and_print_probabilities(lst):
         probability = count / total_count
         print(f"{num:02}: {probability:.2%}")
 
+def ana_by_win(win):
+    print('window ' + str(win))
+    red_list, blue_list = read_predict_data(win)
+    print("red:")
+    count_and_print_probabilities(red_list)
+    print("blue:")
+    count_and_print_probabilities(blue_list)
+
+# window 3
 print('start')
-red_list, blue_list = read_predict_data()
-#print(red_list)
-#print(blue_list)
-print("red:")
-count_and_print_probabilities(red_list)
-print("blue:")
-count_and_print_probabilities(blue_list)
+ana_by_win(3)
+ana_by_win(5)
+ana_by_win(7)
 print('end')
